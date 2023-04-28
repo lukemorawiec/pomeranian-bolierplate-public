@@ -1,0 +1,12 @@
+.font-test-family {
+  font-family: Chilanka;
+}
+
+.exercise1-button {
+  padding: 10px 30px;
+  margin: 5px;
+  background-color: crimson;
+  border: 4px solid orange;
+  color: white;
+  border-radius: 5px;
+}
