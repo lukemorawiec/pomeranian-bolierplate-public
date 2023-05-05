@@ -3,7 +3,7 @@ import { HouseIcon } from '../Components/Icons/HouseIcon';
 import { ElementIcon } from '../Components/Icons/ElementIcon';
 import { EditIcon } from '../Components/Icons/EditIcon';
 import { PersonalCardIcon } from '../Components/Icons/PersonalCardIcon';
-import { CalenderIcon } from '../Components/Icons/CalendarIcon';
+import { CalendarIcon } from '../Components/Icons/CalendarIcon';
 
 import './styles/aside.css';
 
@@ -34,7 +34,7 @@ export function AppAside() {
           </li>
           <li>
             <NavLink className="aside-row" to="blog">
-              <CalenderIcon className="menu-icon" /> Blog
+              <CalendarIcon className="menu-icon" /> Blog
             </NavLink>
           </li>
         </ul>
