@@ -1,0 +1,33 @@
+.faq-section {
+  border: 1px solid grey;
+  border-left-width: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 20px 0;
+  font-size: 1rem;
+  box-shadow: 0 0 5px lightgray;
+}
+
+.question {
+  font-weight: bold;
+  padding: 5px 0 10px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.answer {
+  border-top: 1px solid lightgray;
+  padding-top: 10px;
+  font-size: 0.8em;
+}
+
+.arrow-icon {
+  margin: 7px 5px 0 0;
+}
+
+.arrow-icon-rotated {
+  transform: rotate(-90deg);
+}
+.arrow-icon path {
+  fill: red;
+}

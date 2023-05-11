@@ -21,6 +21,7 @@ aside li {
 .menu-icon {
   margin-right: 10px;
   fill: red;
+  width: 23px;
 }
 
 .aside-row {

@@ -3,6 +3,7 @@ import { HouseIcon } from '../Components/Icons/HouseIcon';
 import { ElementIcon } from '../Components/Icons/ElementIcon';
 import { EditIcon } from '../Components/Icons/EditIcon';
 import { PersonalCardIcon } from '../Components/Icons/PersonalCardIcon';
+import { FaqIcon } from '../Components/Icons/FaqIcon';
 
 import './styles/aside.css';
 
@@ -26,6 +27,12 @@ export function AppAside() {
             <NavLink className="aside-row" to="blocks">
               <ElementIcon className="menu-icon" />
               Bloki
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className="aside-row" to="faq">
+              <FaqIcon className="menu-icon" />
+              FAQ
             </NavLink>
           </li>
           <li>
