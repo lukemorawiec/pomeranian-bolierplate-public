@@ -1,9 +1,11 @@
+
 import { NavLink } from 'react-router-dom';
 import { HouseIcon } from '../Components/Icons/HouseIcon';
 import { ElementIcon } from '../Components/Icons/ElementIcon';
 import { EditIcon } from '../Components/Icons/EditIcon';
 import { PersonalCardIcon } from '../Components/Icons/PersonalCardIcon';
 import { CalendarIcon } from '../Components/Icons/CalendarIcon';
+import { Faq } from '../Components/Icons/Faq';
 
 import './styles/aside.css';
 
@@ -35,6 +37,10 @@ export function AppAside() {
           <li>
             <NavLink className="aside-row" to="blog">
               <CalendarIcon className="menu-icon" /> Blog
+           <li>
+            <NavLink className="aside-row" to="faq">
+              <Faq className="menu-icon" /> FAQ
+          </li>
             </NavLink>
           </li>
         </ul>
@@ -43,3 +49,4 @@ export function AppAside() {
     </aside>
   );
 }
+

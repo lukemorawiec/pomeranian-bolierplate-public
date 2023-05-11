@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 
@@ -9,6 +10,7 @@ import { Dashboard } from './App/Dashboard';
 import { Exercises } from './App/Exercises';
 import { MyCV } from './App/MyCV/MyCV';
 import { Blog } from './App/Blog';
+import { FAQ, Faq } from './App/FAQ/FAQ';
 
 export function App() {
   return (
@@ -22,8 +24,10 @@ export function App() {
           <Route path="blog/*" element={<Blog />} />
           <Route path="my-cv/*" element={<MyCV />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="faq/*" element={<Faq />} />
         </Route>
       </Routes>
     </BrowserRouter>
   );
 }
+
