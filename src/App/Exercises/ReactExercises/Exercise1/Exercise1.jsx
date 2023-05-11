@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 
 import './style.css';
@@ -28,3 +29,4 @@ export function Exercise1() {
     </div>
   );
 }
+
