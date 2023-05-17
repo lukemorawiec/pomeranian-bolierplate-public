@@ -1,26 +1,39 @@
 import './styles.css';
 
-let result = 10;
-
-for (let i = 1; i <= 5; i++) {
-  result += i;
-}
-
-console.log(result);
-
 export function Booleans() {
-  const p = true;
-  const q = false;
+  const value1 = 8;
+  // const value2 = 2;
+  // const value3 = 3;
 
-  const condition1 = !(p && q);
-  const condition2 = !p || !q;
+  let result = false;
 
-  console.log(condition1 === condition2);
+  // if (value1 === 1) {
+  //   result = 'jeden';
+  // } else if (value1 === 2) {
+  //   result = 'dwa';
+  // } else if (value1 === 3) {
+  //   result = 'trzy';
+  // } else {
+  //   result = 'inna cyfra';
+  // }
 
-  return (
-    <div>
-      Operatory logiczne
-      {condition1 && <h1>TAJNY TEXT</h1>}
-    </div>
-  );
+  // switch (value1) {
+  //   case 1:
+  //     result = 'jeden';
+  //     break;
+  //   case 2:
+  //     result = 'dwa';
+  //     break;
+  //   case 3:
+  //     result = 'trzy';
+  //     break;
+  //   default:
+  //     result = 'inna cyfra';
+  //     break;
+  // }
+
+  result = value1 >= 1 && value1 <= 3 ? 'mieści się w zakresie' : 'inna liczba';
+
+  console.log(result);
+  return <div>Operatory logiczne</div>;
 }
