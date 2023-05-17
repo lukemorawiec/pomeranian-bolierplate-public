@@ -3,7 +3,7 @@ import { StarIcon } from '../../../Components/Icons/StarIcon';
 
 export function HTMLTables() {
   return (
-    <div>
+    <div className="player-table">
       Table:
       <table>
         <tr>

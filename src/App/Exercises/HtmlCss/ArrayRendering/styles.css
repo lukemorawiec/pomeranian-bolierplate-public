@@ -15,10 +15,10 @@ td {
   border: none;
 }
 
-tr:nth-child(even) {
+.table1 tr:nth-child(even) {
   background-color: #ffd5db;
 }
 
-tr:nth-child(odd) {
+.table1 tr:nth-child(odd) {
   background-color: rgb(240, 10, 221);
 }
