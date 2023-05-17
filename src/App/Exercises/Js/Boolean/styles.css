@@ -1,7 +1,8 @@
-.font-test-family {
-  font-family: Chilanka;
+.boolean-exercises-container,
+input {
+  font-size: 2rem;
 }
-/* .variable-string-placeholder p span */
-.variable-string-placeholder {
-  margin-left: 5px;
+
+.green-text {
+  color: green;
 }
