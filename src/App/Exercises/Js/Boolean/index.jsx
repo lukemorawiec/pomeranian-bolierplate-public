@@ -9,18 +9,18 @@ for (let i = 1; i <= 5; i++) {
 console.log(result);
 
 export function Booleans() {
-  const value1 = false;
-  const value2 = true;
-  const value3 = false;
+  const p = true;
+  const q = false;
 
-  const condition = !(value1 || !value2 || value3);
+  const condition1 = !(p && q);
+  const condition2 = !p || !q;
 
-  // console.log(condition);
+  console.log(condition1 === condition2);
 
   return (
     <div>
       Operatory logiczne
-      {condition && <h1>TAJNY TEXT</h1>}
+      {condition1 && <h1>TAJNY TEXT</h1>}
     </div>
   );
 }
