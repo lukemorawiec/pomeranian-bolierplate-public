@@ -1,17 +1,20 @@
 import './styles.css';
 
-export function Boolean() {
-  const value1 = false;
-  const value2 = true;
-  const value3 = false;
+console.log(result);
 
-  const condition = !(value1 || value2 || value3);
-  console.log(condition);
+export function Boolean() {
+  const p = true;
+  const q = false;
+
+  const condition1 = !(p && q);
+  const condition2 = !p || !q;
+
+  console.log(condition1 === condition2);
 
   return (
     <div>
       Operatory logiczne
-      {condition && <h1> TAJNY TEKST</h1>}
+      {condition1 && <h1> TAJNY TEKST</h1>}
     </div>
   );
 }
