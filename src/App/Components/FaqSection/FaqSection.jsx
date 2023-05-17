@@ -6,10 +6,6 @@ const test = ['jeden', 'dwa', 'trzy'];
 
 const [valueOne, valueTwo, valueThree] = test;
 
-console.log(valueOne);
-console.log(valueTwo);
-console.log(valueThree);
-
 export const FaqSection = (props) => {
   const { question, answer } = props;
   const [answerVisibility, setAnswerVisibility] = useState(false);
