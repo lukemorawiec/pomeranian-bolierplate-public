@@ -1,36 +1,51 @@
 import './styles.css';
-import React from 'react';
+import React, { useState } from 'react';
 
 export function Boolean() {
-  let age = 21;
-  let hasDriverLicense = false;
-  let hasCar = true;
+  const [givenNumber, setGivenNumber] = useState();
+  const [pole, setPole] = useState();
 
-  const condition1 = age >= 18 && hasDriverLicense && hasCar;
-  const condition2 = age >= 18 && hasDriverLicense && !hasCar;
-  const condition3 = age >= 18 && !hasDriverLicense && hasCar;
+  const lessThanOne = 'Podana liczba jest mniejsza od 1.';
+  const moreThanTen = 'Podana liczba jest większa od 10.';
+  const oddNumber = 'Podana liczba jest nieparzysta.';
 
-  function canDrive() {
-    if (condition1) {
-      return 'You can drive your car!';
-    } else if (condition2) {
-      return 'You can drive a rental car.';
-    } else if (condition3) {
-      return "You can't drive without a driver's license.";
+  const handleChange = (event) => {
+    setGivenNumber(event.target.value);
+    showResult(event.target.value);
+  };
 
-      // if (age >= 18) {
-      //   if (hasDriverLicense) {
-      //     if (hasCar) {
-      //       return 'You can drive your car!';
-      //     } else {
-      //       return 'You can drive a rental car.';
-      //     }
-      //   } else {
-      //     return "You can't drive without a driver's license.";
-      //   }
+  function showResult(radius) {
+    if (radius == '') {
+      setPole('');
+    } else if (radius < 1) {
+      setPole(lessThanOne);
+    } else if (radius > 10) {
+      setPole(moreThanTen);
+    } else if (!(radius % 2 == 0)) {
+      setPole(oddNumber);
     } else {
-      return 'You are too young to drive.';
+      let result = calcAreaOfACircle(radius);
+      setPole(result);
     }
   }
-  return <div>{canDrive()}</div>;
+
+  function calcAreaOfACircle(radius) {
+    let area = Math.PI * Math.pow(radius, 2);
+    let roundedArea = `Pole koła: ${area.toFixed(2)}`;
+    return roundedArea;
+  }
+
+  return (
+    <div>
+      <h3>Wpisz liczbę od 1 do 10</h3>
+      <input
+        type="number"
+        onChange={handleChange}
+        value={givenNumber}
+        min="1"
+        max="10"
+      />
+      <p>{pole}</p>
+    </div>
+  );
 }
