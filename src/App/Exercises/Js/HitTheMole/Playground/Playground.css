@@ -1,0 +1,19 @@
+.playground {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 600px;
+  margin: 50px;
+}
+
+.field {
+  background-color: #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  width: 100px;
+  height: 100px;
+}
+
+.field svg {
+  margin-bottom: -84px;
+}

@@ -16,7 +16,7 @@ export const Selector = ({ options }) => {
   };
 
   return (
-    <div>
+    <>
       {modifiedOptions.map((obj) => {
         const { value, label, isActive } = obj;
         return (
@@ -29,6 +29,6 @@ export const Selector = ({ options }) => {
           </Button>
         );
       })}
-    </div>
+    </>
   );
 };

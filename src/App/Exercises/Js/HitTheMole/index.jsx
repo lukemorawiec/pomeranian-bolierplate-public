@@ -4,6 +4,7 @@ import './styles.css';
 import { useState } from 'react';
 import { Button } from './Button/Button';
 import { Selector } from './Selector/Selector';
+import { Playground } from './Playground/Playground';
 
 const timeButtons = [
   { value: 1, label: '1 minuta', isActive: false },
@@ -13,6 +14,9 @@ const timeButtons = [
 ];
 
 export function HitTheMole() {
+  const [isGameStarted, setGameStarted] = useState(false);
+  console.log('czy gra jest wystartowana:', isGameStarted);
+
   return (
     <div className="hit-the-mole">
       <h4>Hit The Mole</h4>
@@ -40,8 +44,17 @@ export function HitTheMole() {
       </div>
       <div className="settings-container">
         <div className="label">Przyciski sterujące</div>
-        <Button>Start</Button>
+
+        {isGameStarted ? (
+          <Button isActive onClick={() => setGameStarted(false)}>
+            Stop
+          </Button>
+        ) : (
+          <Button onClick={() => setGameStarted(true)}>Start</Button>
+        )}
       </div>
+
+      {isGameStarted && <Playground />}
 
       {/* <Menu label="testowy heading">
         <p>raz</p>
