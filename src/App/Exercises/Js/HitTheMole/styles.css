@@ -1,8 +1,8 @@
-.boolean-exercises-container,
-input {
-  font-size: 2rem;
+.settings-container {
+  display: flex;
+  align-items: center;
 }
 
-.green-text {
-  color: green;
+.settings-container .label {
+  width: 130px;
 }

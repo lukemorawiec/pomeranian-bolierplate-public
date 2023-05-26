@@ -3,6 +3,14 @@ import { Menu } from './Menu/Menu';
 import './styles.css';
 import { useState } from 'react';
 import { Button } from './Button/Button';
+import { Selector } from './Selector/Selector';
+
+const timeButtons = [
+  { value: 1, label: '1 minuta', isActive: false },
+  { value: 2, label: '2 minuty', isActive: false },
+  { value: 3, label: '3 minuty', isActive: true },
+  { value: 4, label: '4 minuty', isActive: false },
+];
 
 export function HitTheMole() {
   return (
@@ -12,6 +20,34 @@ export function HitTheMole() {
         Gra polegająca na podążaniu za krecikiem i trafieniu na kwadrat, w
         którym się pojawił.
       </p>
+
+      <div className="settings-container">
+        <div className="label">Czas gry</div>
+
+        <Selector options={timeButtons} />
+      </div>
+      <div className="settings-container">
+        <div className="label">Liczba kretów</div>
+
+        <Selector
+          heading="Czas gry"
+          options={[
+            { value: 1, label: '1 kret', isActive: true },
+            { value: 2, label: '2 krety', isActive: false },
+            { value: 3, label: '3 krety', isActive: false },
+          ]}
+        />
+      </div>
+      <div className="settings-container">
+        <div className="label">Przyciski sterujące</div>
+        <Button>Start</Button>
+      </div>
+
+      {/* <Menu label="testowy heading">
+        <p>raz</p>
+        <p>dwa</p>
+        <p>trzy</p>
+      </Menu>
 
       <Menu label="Czas gry">
         <SelectButtons
@@ -33,7 +69,7 @@ export function HitTheMole() {
       </Menu>
       <Menu label="Przyciski sterujące">
         <Button>Start</Button>
-      </Menu>
+      </Menu> */}
     </div>
   );
 }
