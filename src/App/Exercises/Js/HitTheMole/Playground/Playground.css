@@ -12,8 +12,17 @@
   padding: 5px;
   width: 100px;
   height: 100px;
+  cursor: pointer;
 }
 
 .field svg {
   margin-bottom: -84px;
+}
+
+.field-green {
+  background-color: greenyellow;
+}
+
+.field-red {
+  background-color: red;
 }
