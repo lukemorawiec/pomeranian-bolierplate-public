@@ -6,6 +6,7 @@ import { blockRouterMetaData as blockRouterMetaDataJsFunction1 } from './Exercis
 import { booleanRouterMetaData } from './Boolean/router-data';
 import { routerMetaData as valuesAndCommentsRouterData } from './ValuesAndComments/router-data';
 import { routerMetaData as hitTheMoleRouterData } from './HitTheMole/router-data';
+import { routerMetaData as memoGameRouterData } from './MemoGame/router-data';
 
 export const blockRouterMetaData = [
   blockRouterMetaDataJsVariables1,
@@ -14,5 +15,6 @@ export const blockRouterMetaData = [
   booleanRouterMetaData,
   valuesAndCommentsRouterData,
   hitTheMoleRouterData,
+  memoGameRouterData,
 ];
 export const blockRouterData = getParsedRouterDataList(blockRouterMetaData);
