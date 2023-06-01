@@ -37,11 +37,16 @@ const generateBoard = (size) => {
 
 export const Board = ({ boardSize }) => {
   const [board, setBoard] = useState(generateBoard(boardSize));
-  console.log(board);
+  console.log('board', board);
+
   return (
     <div className="board">
       {board.map((field) => {
-        return <div className="board-field">{field.value}</div>;
+        return (
+          <div key={field.id} className="board-field">
+            {field.value}
+          </div>
+        );
       })}
     </div>
   );

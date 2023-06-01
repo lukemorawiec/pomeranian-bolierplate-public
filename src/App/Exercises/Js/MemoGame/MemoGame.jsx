@@ -1,7 +1,7 @@
 import './MemoGame.css';
 import { useState } from 'react';
 import { MenuView } from './MenuView/MenuView';
-import { Board } from './MenuView/Board/Board';
+import { Board } from './Board/Board';
 
 export function MemoGame() {
   const boardSize = 16;
