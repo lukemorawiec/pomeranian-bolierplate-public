@@ -14,4 +14,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.field-clicked {
+  background-color: #e8e8e8;
+}
+
+.field-paired {
+  background-color: #1097eb;
 }
