@@ -12,8 +12,6 @@ export function MemoGame() {
 
   const [timeInterval, setTimeInterval] = useState();
 
-  console.log('time', time);
-
   useEffect(() => {
     if (isGameStarted) {
       const gameInterval = setInterval(() => {
