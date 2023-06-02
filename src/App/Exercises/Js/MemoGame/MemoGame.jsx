@@ -11,7 +11,11 @@ export function MemoGame() {
   const [stepAmount, setStepAmount] = useState(0);
   const [time, setTime] = useState(0);
 
+  const [gameEnd, setGameEnd] = useState(false);
+
   const [timeInterval, setTimeInterval] = useState();
+
+  const [myTime, setMyTime] = useState(0);
 
   useEffect(() => {
     if (isGameStarted) {
@@ -29,8 +33,15 @@ export function MemoGame() {
     }
   }, [isGameStarted]);
 
+  const stopButtonClick = () => {
+    setGameStarted(false);
+    setStepAmount(0);
+  };
+
   return (
     <div className="memo-game">
+      {isGameStarted && !gameEnd && <p>gra w toku</p>}
+      {gameEnd && isGameStarted && <h1>Wygrales! {myTime} sekund</h1>}
       {!isGameStarted && (
         <MenuView
           setGameStarted={setGameStarted}
@@ -40,9 +51,10 @@ export function MemoGame() {
       )}
       {isGameStarted && (
         <GameView
-          setGameStarted={setGameStarted}
+          stopButtonClick={stopButtonClick}
           stepAmount={stepAmount}
           time={time}
+          myTime={myTime}
         />
       )}
 
@@ -51,6 +63,9 @@ export function MemoGame() {
           boardSize={boardSize}
           stepAmount={stepAmount}
           setStepAmount={setStepAmount}
+          setGameEnd={setGameEnd}
+          time={time}
+          setMyTime={setMyTime}
         />
       )}
     </div>
