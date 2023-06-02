@@ -17,3 +17,8 @@
 .button-active {
   background-color: #16a53a;
 }
+
+.button:disabled {
+  background-color: gray;
+  cursor: initial;
+}

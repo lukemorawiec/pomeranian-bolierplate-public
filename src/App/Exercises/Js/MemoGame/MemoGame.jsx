@@ -5,7 +5,8 @@ import { GameView } from './GameView/GameView';
 import { Board } from './Board/Board';
 
 export function MemoGame() {
-  const boardSize = 16;
+  const [boardSize, setBoardSize] = useState(0);
+
   const [isGameStarted, setGameStarted] = useState(false);
   const [stepAmount, setStepAmount] = useState(0);
   const [time, setTime] = useState(0);
@@ -30,7 +31,13 @@ export function MemoGame() {
 
   return (
     <div className="memo-game">
-      {!isGameStarted && <MenuView setGameStarted={setGameStarted} />}
+      {!isGameStarted && (
+        <MenuView
+          setGameStarted={setGameStarted}
+          setBoardSize={setBoardSize}
+          boardSize={boardSize}
+        />
+      )}
       {isGameStarted && (
         <GameView
           setGameStarted={setGameStarted}

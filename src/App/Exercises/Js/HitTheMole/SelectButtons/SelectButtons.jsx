@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { Button } from '../Button/Button';
 
 export const SelectButtons = (props) => {
-  const { options } = props;
+  const { options, setValue } = props;
 
   const [newOptions, setNewOptions] = useState(options);
 
   function handleClick(value) {
+    setValue(value);
+
     setNewOptions(
       newOptions.map((option) => {
         return {

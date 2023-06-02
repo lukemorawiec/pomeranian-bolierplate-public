@@ -39,7 +39,7 @@ const FIELD_CLICK_RESET_DELAY = 800;
 
 export const Board = ({ boardSize, stepAmount, setStepAmount }) => {
   const [board, setBoard] = useState(generateBoard(boardSize));
-  console.log('board', board);
+  // console.log('board', board);
 
   const [firstClickedFieldId, setFirstClickedFieldId] = useState();
   const [secondClickedFieldId, setSecondClickedFieldId] = useState();
