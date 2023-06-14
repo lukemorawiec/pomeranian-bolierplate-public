@@ -1,0 +1,14 @@
+.todo-item {
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.todo-title {
+  margin-top: 0;
+}
+
+.checked-icon {
+  color: green;
+}
