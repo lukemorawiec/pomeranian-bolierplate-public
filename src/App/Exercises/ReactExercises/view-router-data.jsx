@@ -2,11 +2,11 @@ import { getParsedRouterDataList } from '../../router-data/parseRouterData';
 
 import { SubRouteExampleMetaData } from './SubRouteExample/router-data';
 import { SideEffectsData } from './SideEffects/router-data';
-import { routerData as ApiRequestsRouterData } from './ApiRequests/router-data';
+import { routerData as TodoListRouterData } from './TodoList/router-data';
 
 export const blockRouterMetaData = [
   SubRouteExampleMetaData,
   SideEffectsData,
-  ApiRequestsRouterData,
+  TodoListRouterData,
 ];
 export const blockRouterData = getParsedRouterDataList(blockRouterMetaData);

@@ -1,0 +1,22 @@
+.todo-item {
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+}
+
+.todo-content {
+  flex-grow: 1;
+}
+
+.todo-title {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.checked-icon {
+  color: green;
+  font-size: 3em;
+  text-align: center;
+}
