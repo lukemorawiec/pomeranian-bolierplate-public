@@ -5,10 +5,23 @@
   color: green;
   font-size: 3em;
   text-align: center;
+  cursor: pointer;
 }
 
 .unchecked-icon {
   color: gray;
+  font-size: 3em;
+  text-align: center;
+  cursor: pointer;
+  transition: 3s all;
+
+  &:hover {
+    color: green;
+  }
+}
+
+.mark-error {
+  color: red;
   font-size: 3em;
   text-align: center;
 }

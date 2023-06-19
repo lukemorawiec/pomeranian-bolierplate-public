@@ -28,6 +28,20 @@ export const TodoItem = (props) => {
       });
   };
 
+  const [markAsDoneError, setMarkAsDoneError] = useState('');
+
+  const markAsDone = async () => {
+    setMarkAsDoneError('');
+
+    requestHandler('PUT', `${id}/markAsDone`)
+      .then(() => {
+        getTodoList();
+      })
+      .catch(() => {
+        setMarkAsDoneError('Nie udało się ukończyć!');
+      });
+  };
+
   return (
     <div className="todo-item">
       <div className="todo-content">
@@ -45,8 +59,12 @@ export const TodoItem = (props) => {
           Delete
         </button>
         <div className="delete-error">{deleteError}</div>
-
-        <ToDoStatus isDone={isDone} isDoneDate={parseDate(doneDate)} />
+        <ToDoStatus
+          isDone={isDone}
+          isDoneDate={parseDate(doneDate)}
+          markAsDone={markAsDone}
+          markAsDoneError={markAsDoneError}
+        />
       </div>
     </div>
   );
