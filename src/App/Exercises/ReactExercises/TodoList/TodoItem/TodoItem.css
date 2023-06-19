@@ -15,12 +15,6 @@
   font-weight: bold;
 }
 
-.checked-icon {
-  color: green;
-  font-size: 3em;
-  text-align: center;
-}
-
 .delete-error {
   color: red;
 }

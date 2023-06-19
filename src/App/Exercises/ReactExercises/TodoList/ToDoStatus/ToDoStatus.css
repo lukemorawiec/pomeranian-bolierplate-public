@@ -1,0 +1,14 @@
+.todo-status {
+}
+
+.checked-icon {
+  color: green;
+  font-size: 3em;
+  text-align: center;
+}
+
+.unchecked-icon {
+  color: gray;
+  font-size: 3em;
+  text-align: center;
+}

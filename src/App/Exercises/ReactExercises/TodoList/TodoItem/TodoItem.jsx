@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import { requestHandler } from '../requestHandler';
 import './TodoItem.css';
+import { ToDoStatus } from '../ToDoStatus/ToDoStatus';
 
 const parseDate = (date) => {
-  const dateObj = new Date(date);
-  return dateObj.toDateString();
+  if (date) {
+    const dateObj = new Date(date);
+    return dateObj.toDateString();
+  } else {
+    return date;
+  }
 };
 
 export const TodoItem = (props) => {
@@ -41,12 +46,7 @@ export const TodoItem = (props) => {
         </button>
         <div className="delete-error">{deleteError}</div>
 
-        {isDone && (
-          <div>
-            <div className="checked-icon">&#10004;</div>
-            <div>{parseDate(doneDate)}</div>
-          </div>
-        )}
+        <ToDoStatus isDone={isDone} isDoneDate={parseDate(doneDate)} />
       </div>
     </div>
   );
