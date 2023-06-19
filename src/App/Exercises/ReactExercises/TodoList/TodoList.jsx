@@ -65,7 +65,6 @@ export function TodoList() {
               note={item.note}
               doneDate={item.doneDate}
               getTodoList={getTodoList}
-              setError={setError}
             />
           );
         })}

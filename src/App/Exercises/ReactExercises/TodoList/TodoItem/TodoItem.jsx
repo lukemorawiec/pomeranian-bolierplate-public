@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { requestHandler } from '../requestHandler';
 import './TodoItem.css';
 
@@ -7,17 +8,10 @@ const parseDate = (date) => {
 };
 
 export const TodoItem = (props) => {
-  const {
-    id,
-    title,
-    createdAt,
-    author,
-    isDone,
-    note,
-    doneDate,
-    getTodoList,
-    setError,
-  } = props;
+  const { id, title, createdAt, author, isDone, note, doneDate, getTodoList } =
+    props;
+
+  const [deleteError, setDeleteError] = useState('');
 
   const deleteTodo = async (selectedId) => {
     requestHandler('DELETE', selectedId)
@@ -25,7 +19,7 @@ export const TodoItem = (props) => {
         getTodoList();
       })
       .catch((errorMessage) => {
-        setError(errorMessage);
+        setDeleteError(errorMessage);
       });
   };
 
@@ -45,6 +39,8 @@ export const TodoItem = (props) => {
         >
           Delete
         </button>
+        <div className="delete-error">{deleteError}</div>
+
         {isDone && (
           <div>
             <div className="checked-icon">&#10004;</div>
