@@ -1,4 +1,4 @@
-export async function requestHandler(selectedMethod, id) {
+export async function requestHandler(selectedMethod, id, data) {
   return new Promise(async (resolve, reject) => {
     let endOfUrl = '';
 
@@ -7,7 +7,12 @@ export async function requestHandler(selectedMethod, id) {
     }
 
     const response = await fetch(`http://localhost:3333/api/todo${endOfUrl}`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
       method: selectedMethod,
+      body: JSON.stringify(data),
     });
     const jsonResponse = await response.json();
 
