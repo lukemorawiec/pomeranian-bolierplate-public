@@ -11,6 +11,8 @@ export function TodoList() {
 
   const [showCreateForm, setShowCreateForm] = useState(false);
 
+  const [editObject, setEditObject] = useState();
+
   const getTodoList = async () => {
     setIsLoading(true);
 
@@ -37,7 +39,12 @@ export function TodoList() {
   if (showCreateForm) {
     return (
       <div className="api-requests">
-        <ToDoForm hide={setShowCreateForm} />
+        <ToDoForm
+          hide={setShowCreateForm}
+          getTodoList={getTodoList}
+          editObject={editObject}
+          setEditObject={setEditObject}
+        />
       </div>
     );
   }
@@ -78,11 +85,15 @@ export function TodoList() {
               note={item.note}
               doneDate={item.doneDate}
               getTodoList={getTodoList}
+              setEditObject={setEditObject}
+              setShowCreateForm={setShowCreateForm}
             />
           );
         })}
 
-      <button onClick={() => setShowCreateForm(true)}>Dodaj</button>
+      <button className="todo-button" onClick={() => setShowCreateForm(true)}>
+        Dodaj
+      </button>
     </div>
   );
 }

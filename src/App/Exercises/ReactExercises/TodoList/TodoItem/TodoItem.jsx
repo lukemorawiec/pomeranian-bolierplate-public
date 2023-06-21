@@ -13,8 +13,18 @@ const parseDate = (date) => {
 };
 
 export const TodoItem = (props) => {
-  const { id, title, createdAt, author, isDone, note, doneDate, getTodoList } =
-    props;
+  const {
+    id,
+    title,
+    createdAt,
+    author,
+    isDone,
+    note,
+    doneDate,
+    getTodoList,
+    setEditObject,
+    setShowCreateForm,
+  } = props;
 
   const [deleteError, setDeleteError] = useState('');
 
@@ -52,11 +62,26 @@ export const TodoItem = (props) => {
       </div>
       <div>
         <button
+          className="todo-button"
           onClick={() => {
             deleteTodo(id);
           }}
         >
           Delete
+        </button>
+        <button
+          className="todo-button"
+          onClick={() => {
+            setShowCreateForm(true);
+            setEditObject({
+              id: id,
+              title: title,
+              author: author,
+              note: note,
+            });
+          }}
+        >
+          Edit
         </button>
         <div className="delete-error">{deleteError}</div>
         <ToDoStatus
