@@ -1,2 +1,27 @@
 .forms {
 }
+
+.form-section {
+}
+
+.form-section-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 32px;
+}
+
+.form-section-input-wrapper {
+}
+
+.form-section-input-label {
+  margin-bottom: 8px;
+}
+
+.form-section-input {
+  font-size: 14px;
+  width: 50%;
+}
+
+.submit-wrapper {
+  margin-top: 32px;
+}
