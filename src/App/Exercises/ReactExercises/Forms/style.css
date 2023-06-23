@@ -25,3 +25,11 @@
 .submit-wrapper {
   margin-top: 32px;
 }
+
+.text-red {
+  color: red;
+}
+
+.input-error {
+  background-color: pink;
+}
