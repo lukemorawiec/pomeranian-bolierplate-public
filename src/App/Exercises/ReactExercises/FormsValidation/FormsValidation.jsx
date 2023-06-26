@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
 import './style.css';
 
-const form = {
-  isEmailValid: {
-    isValid: false,
-    error: 'Asd',
-  },
-  isPasswordValid: false,
-};
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { firebaseApp } from '../../../../firebase';
 
 const containsUppercase = (str) => {
   return /[A-Z]/.test(str);
@@ -21,12 +16,7 @@ const containsEmail = (str) => {
 
 export function FormsValidation() {
   const [error, setError] = useState('');
-  const [validProgress, setValidProgress] = useState({ email: true });
-
-  setValidProgress((prevState) => ({
-    ...prevState,
-    email: false,
-  }));
+  const [isAuthorized, setAuthorized] = useState('');
 
   const isPasswordValid = (pass, repeat) => {
     if (pass !== repeat) {
@@ -66,24 +56,30 @@ export function FormsValidation() {
     const email = data.target.email.value;
 
     if (isPasswordValid(password, passwordRepeat) && isEmailValid(email)) {
-      console.log('OK');
+      signInWithEmailAndPassword(getAuth(firebaseApp), email, password)
+        .then((userCredential) => {
+          // User signed in successfully
+          const user = userCredential.user;
+          setAuthorized(`Zalogowano jako: ${user.email}`);
+        })
+        .catch((error) => {
+          // Handle sign-in error
+          console.error('Sign-in error:', error);
+        });
     } else {
       console.log('Error');
     }
   };
 
-  <div></div>;
-
   return (
     <div className="forms-validation">
       <form className="form" onSubmit={sendFormData}>
-        <input type="email" placeholder="Wpisz email" name="email" />
+        <input type="email" placeholder="Wpisz email" name="email" required />
         <br /> <br />
         <input
           type="password"
           placeholder="Wpisz hasło"
           name="password"
-          pattern=""
           required
         />
         <br /> <br />
@@ -97,6 +93,8 @@ export function FormsValidation() {
         {error || '---'}
         <br /> <br />
         <button type="submit">Zapisz</button>
+        <br />
+        {isAuthorized}
       </form>
     </div>
   );
