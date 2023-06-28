@@ -7,6 +7,7 @@ import { booleanRouterMetaData } from './Boolean/router-data';
 import { routerMetaData as valuesAndCommentsRouterData } from './ValuesAndComments/router-data';
 import { routerMetaData as hitTheMoleRouterData } from './HitTheMole/router-data';
 import { usersListRouterMetaData as usersListRouterData } from './UsersList/router-data';
+import { routerMetaData as unitTestsRouterMetaData } from './UnitTests/router-data';
 
 export const blockRouterMetaData = [
   blockRouterMetaDataJsVariables1,
@@ -16,5 +17,6 @@ export const blockRouterMetaData = [
   valuesAndCommentsRouterData,
   hitTheMoleRouterData,
   usersListRouterData,
+  unitTestsRouterMetaData,
 ];
 export const blockRouterData = getParsedRouterDataList(blockRouterMetaData);
