@@ -6,6 +6,7 @@ import { routerData as TodoListRouterData } from './TodoList/router-data';
 import { useRefMetaData } from './UseRef/router-data';
 import { formsMetaData } from './Forms/router-data';
 import { FormsValidationData } from './FormsValidation/router-data';
+import { reduxRouterData } from './Redux/router-data';
 
 export const blockRouterMetaData = [
   SubRouteExampleMetaData,
@@ -14,5 +15,6 @@ export const blockRouterMetaData = [
   useRefMetaData,
   formsMetaData,
   FormsValidationData,
+  reduxRouterData,
 ];
 export const blockRouterData = getParsedRouterDataList(blockRouterMetaData);
