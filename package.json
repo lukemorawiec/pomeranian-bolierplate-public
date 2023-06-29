@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "eslint": "^8.43.0",
     "firebase": "^9.23.0",
+    "husky": "^8.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.2",
@@ -20,7 +21,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --ext .jsx --ext .js --ext .ts --ext .tsx src"
+    "lint": "eslint --ext .jsx --ext .js --ext .ts --ext .tsx src",
+    "pretty": "prettier --write src/**/*.jsx src/**/*.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "prettier --write . && git add -A ."
+    }
   },
   "eslintConfig": {
     "extends": [
