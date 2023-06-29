@@ -19,19 +19,6 @@ export function Forms() {
 
   const sendFormData = (e) => {
     e.preventDefault();
-
-    const result = {
-      type,
-      name,
-      environment,
-      github,
-      payment,
-      rules,
-      marketing,
-      email,
-    };
-
-    console.log('result', result);
   };
 
   const typeOptions = [
