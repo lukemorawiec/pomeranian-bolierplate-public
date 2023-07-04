@@ -1,5 +1,3 @@
-import { SelectButtons } from './SelectButtons/SelectButtons';
-import { Menu } from './Menu/Menu';
 import './styles.css';
 import { useState } from 'react';
 import { Playground } from './Playground/Playground';

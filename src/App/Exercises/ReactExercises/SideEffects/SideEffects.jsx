@@ -1,26 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './style.css';
 
 export function SideEffects() {
   const [value, setValue] = useState(0);
 
-  useEffect(() => {
-    console.log('value: ' + value);
-
-    return () => {
-      console.log('return useeffect value');
-    };
-  }, [value]);
-
   const [age, setAge] = useState(10);
-
-  useEffect(() => {
-    console.log(`age: ${age}`);
-
-    return () => {
-      console.log('return useeffect age');
-    };
-  }, [age]);
 
   return (
     <div className="side-effects">

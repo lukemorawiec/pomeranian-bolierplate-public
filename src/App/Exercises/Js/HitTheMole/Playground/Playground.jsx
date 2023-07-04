@@ -23,8 +23,6 @@ export const Playground = ({ score, setScore }) => {
   const [modifiedFields, setModifiedFields] = useState(fields);
   const [fieldWithMoleId, setFieldWithMoleId] = useState(getRandomInt(10));
 
-  console.log('modifiedFields', modifiedFields);
-
   useEffect(() => {
     setInterval(() => {
       const newRadomIndex = getRandomInt(10);
@@ -54,8 +52,6 @@ export const Playground = ({ score, setScore }) => {
   };
 
   const handleClick = (clickedField, isMolePresentFlag) => {
-    console.log('klikniete pole: ', clickedField);
-
     // ustawienie stanu "czy kliknięte"
     setModifiedFields(
       modifiedFields.map((field) => {

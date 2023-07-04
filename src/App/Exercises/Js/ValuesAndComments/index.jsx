@@ -7,35 +7,27 @@ const arr = ['źrebak', 'łąka', 'zegarek', 'auto', 'kanapa', 'placek'];
 
 // --------------------------------------------------
 
-const calculatePixels = (height, width) => {
-  const parsedHeight = parseInt(height);
-  const parsedWidth = parseInt(width);
+// const calculatePixels = (height, width) => {
+//   const parsedHeight = parseInt(height);
+//   const parsedWidth = parseInt(width);
 
-  const calculation = parsedHeight * parsedWidth;
+//   const calculation = parsedHeight * parsedWidth;
 
-  return (calculation / 1000 / 1000).toFixed(2) + 'Mpx';
-};
+//   return (calculation / 1000 / 1000).toFixed(2) + 'Mpx';
+// };
 
 // console.log(calculatePixels('1080px', '1920px'));
 
 // --------------------------------------------------
 
-const getInfoAboutValue = (value) => {
-  const type = typeof value;
-  const logicValue = !!value;
+// const getInfoAboutValue = (value) => {
+//   const type = typeof value;
+//   const logicValue = !!value;
 
-  return `Typ wartości: ${type}\nwartość: ${value}\nwartość logiczna: ${
-    logicValue ? 'True' : 'False'
-  }`;
-};
-
-// console.log(getInfoAboutValue(undefined));
-// console.log(getInfoAboutValue([]));
-// console.log(getInfoAboutValue(null));
-// console.log(getInfoAboutValue({}));
-// console.log(getInfoAboutValue(['arr', 'ay']));
-// console.log(getInfoAboutValue(123));
-// console.log(getInfoAboutValue('abc'));
+//   return `Typ wartości: ${type}\nwartość: ${value}\nwartość logiczna: ${
+//     logicValue ? 'True' : 'False'
+//   }`;
+// };
 
 export function ValuesAndComments() {
   let initText = 'ala_ma_kota_a_tomek_ma_psa';

@@ -63,11 +63,9 @@ export function FormsValidation() {
           setAuthorized(`Zalogowano jako: ${user.email}`);
         })
         .catch((error) => {
-          // Handle sign-in error
+          // eslint-disable-next-line no-console
           console.error('Sign-in error:', error);
         });
-    } else {
-      console.log('Error');
     }
   };
 

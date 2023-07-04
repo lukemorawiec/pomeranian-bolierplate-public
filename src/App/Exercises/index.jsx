@@ -1,11 +1,10 @@
 import React from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
-
+import { NotFound } from '../Components/NotFound/NotFound';
 import { JsExerciseItem, JsExercises } from './Js';
 import { HtmlCssExercises, HtmlCssExerciseItem } from './HtmlCss';
 import { Categories } from './Categories';
 import { ReactExercises, ReactExercisesItem } from './ReactExercises';
-import { NotFound } from '../Components/NotFound/NotFound';
 
 import './styles.css';
 

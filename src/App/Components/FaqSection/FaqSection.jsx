@@ -2,10 +2,6 @@ import React, { useState } from 'react';
 import { ArrowIcon } from '../Icons/ArrowIcon';
 import './styles.css';
 
-const test = ['jeden', 'dwa', 'trzy'];
-
-const [valueOne, valueTwo, valueThree] = test;
-
 export const FaqSection = (props) => {
   const { question, answer } = props;
   const [answerVisibility, setAnswerVisibility] = useState(false);
