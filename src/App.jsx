@@ -12,6 +12,8 @@ import { FAQ } from './App/FAQ/FAQ';
 
 import { store } from './store';
 import { Provider } from 'react-redux';
+import { requestHandler } from './App/Exercises/ReactExercises/TodoList/requestHandler';
+
 
 export function App() {
   return (

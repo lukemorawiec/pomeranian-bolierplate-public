@@ -3,14 +3,18 @@ import Select from 'react-select';
 import './style.css';
 import RadioButtons from './RadioButtons/RadioButtons';
 import Checkbox from './Checkbox/Checkbox';
+import { useDispatch, useSelector } from 'react-redux';
+import { setValue } from '../../../../store/features/formSlice';
 
 export function Forms() {
-  const [type, setType] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const formFields = useSelector((state) => state.form);
+  const dispatch = useDispatch();
+
+  console.log('formFields', formFields);
+
+  const { name, email, type } = formFields;
 
   const [environment, setEnvironment] = useState(false);
-  const [github, setGithub] = useState(false);
 
   const [payment, setPayment] = useState('blik');
 
@@ -20,16 +24,7 @@ export function Forms() {
   const sendFormData = (e) => {
     e.preventDefault();
 
-    const result = {
-      type,
-      name,
-      environment,
-      github,
-      payment,
-      rules,
-      marketing,
-      email,
-    };
+    const result = formFields;
 
     console.log('result', result);
   };
@@ -70,7 +65,9 @@ export function Forms() {
             options={typeOptions}
             value={typeOptions.find((option) => option.value === type)}
             onChange={(optionObj) => {
-              setType(optionObj.value);
+              dispatch(
+                setValue({ fieldName: 'type', fieldValue: optionObj.value })
+              );
             }}
           />
         </div>
@@ -98,12 +95,7 @@ export function Forms() {
             label="Ustawienie środowiska"
           />
 
-          <Checkbox
-            name="github"
-            isChecked={github}
-            setter={setGithub}
-            label="Intro do GitHub"
-          />
+          <Checkbox name="github" label="Intro do GitHub" />
         </div>
       </div>
       <div className="form-section">
@@ -112,7 +104,11 @@ export function Forms() {
           <div className="form-section-input-label">Imię i nazwisko</div>
           <input
             value={name}
-            onChange={(event) => setName(event.target.value)}
+            onChange={(event) =>
+              dispatch(
+                setValue({ fieldName: 'name', fieldValue: event.target.value })
+              )
+            }
             type="text"
             className={`form-section-input ${
               isNameTyped && !isProperNameAndSurname ? 'input-error' : ''
@@ -127,7 +123,11 @@ export function Forms() {
           <div className="form-section-input-label">Email</div>
           <input
             value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            onChange={(event) =>
+              dispatch(
+                setValue({ fieldName: 'email', fieldValue: event.target.value })
+              )
+            }
             type="text"
             className={`form-section-input ${
               isEmailTyped && !isEmailProper ? 'input-error' : ''
