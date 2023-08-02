@@ -1,4 +1,4 @@
-export const formatDate = (dateString, hasYear) => {
+export function formatDate(dateString) {
   const date = new Date(dateString);
 
   const options = {
@@ -10,4 +10,4 @@ export const formatDate = (dateString, hasYear) => {
   };
 
   return date.toLocaleString('pl-PL', options);
-};
+}
