@@ -5,15 +5,6 @@ import { TodoItem } from './TodoItem/TodoItem';
 
 const BASE_API_URL = 'http://localhost:3333/api';
 
-function Message({ textColor, text, test123 }) {
-  console.log(test123);
-  return (
-    <h1 style={{ color: textColor }}>
-      {text} ({textColor})
-    </h1>
-  );
-}
-
 export function TodoList2() {
   const [todoList, setTodoList] = useState([]);
   const [error, setError] = useState([]);
@@ -49,10 +40,6 @@ export function TodoList2() {
   return (
     <div className="todo-container">
       <h2 className="todo-container__title">Todo List 2</h2>
-
-      <Message text="tajna wiadomość" textColor="green" />
-
-      <Message text="super tajna wiadomość" textColor="pink" test123={123} />
 
       {error && <p>{error}</p>}
 
