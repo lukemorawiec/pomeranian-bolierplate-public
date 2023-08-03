@@ -9,7 +9,7 @@
 }
 
 .todo-item--darker {
-  background-color: #898989;
+  background-color: #cddde8;
 }
 
 .todo-item__wrapper {
@@ -40,8 +40,6 @@
 }
 
 .todo-item__actions__button:hover {
-  box-shadow: 0 0 10px #06a0f9;
-  background-color: #ccc;
   cursor: pointer;
 }
 

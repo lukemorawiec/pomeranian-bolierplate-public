@@ -4,7 +4,6 @@
 
 .bin-icon:hover path {
   stroke: #06a0f9;
-  cursor: pointer;
 }
 
 .bin-icon--error path {

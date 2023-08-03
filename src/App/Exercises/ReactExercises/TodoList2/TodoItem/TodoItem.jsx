@@ -1,11 +1,19 @@
+import axios from 'axios';
 import { formatDate } from '../../../../../helpers/formatDate';
 import { BinIcon } from '../../../../Images/Icons/BinIcon/BinIcon';
 import './TodoItem.css';
+import { BASE_API_URL } from '../TodoList2';
 
 export function TodoItem({ todo }) {
-  const { title, author, createdAt, isDone, doneDate, note } = todo;
+  const { id, title, author, createdAt, isDone, doneDate, note } = todo;
 
   const itemClasses = `todo-item ${isDone ? 'todo-item--darker' : ''}`;
+
+  function handleRemoveClick() {
+    console.log('USUN id: ', id);
+
+    axios.delete(BASE_API_URL + '/todo/' + id);
+  }
 
   return (
     <div className={itemClasses}>
@@ -23,8 +31,9 @@ export function TodoItem({ todo }) {
         <button
           className="todo-item__actions__button 
         todo-item__actions__icon"
+          onClick={() => handleRemoveClick()}
         >
-          <BinIcon isError={true} />
+          <BinIcon />
         </button>
 
         {isDone && (

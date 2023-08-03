@@ -3,7 +3,7 @@ import axios from 'axios';
 import './style.css';
 import { TodoItem } from './TodoItem/TodoItem';
 
-const BASE_API_URL = 'http://localhost:3333/api';
+export const BASE_API_URL = 'http://localhost:3333/api';
 
 export function TodoList2() {
   const [todoList, setTodoList] = useState([]);
