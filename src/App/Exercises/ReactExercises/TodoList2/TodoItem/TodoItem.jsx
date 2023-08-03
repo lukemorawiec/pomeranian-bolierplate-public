@@ -65,6 +65,7 @@ export function TodoItem({ todo, handleFetchTodoData }) {
 }
 
 /**
+ * USUWANIE TODOSA:
  * utworzenie buttona
  * wybór elementu do usunięcia
  * request do API

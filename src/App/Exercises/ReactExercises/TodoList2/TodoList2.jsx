@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './style.css';
 import { TodoItem } from './TodoItem/TodoItem';
+import { TodoForm } from './TodoForm/TodoForm';
 
 export const BASE_API_URL = 'http://localhost:3333/api';
 
 export function TodoList2() {
   const [todoList, setTodoList] = useState([]);
   const [error, setError] = useState([]);
+  const [isAddingMode, setAddingMode] = useState(false);
 
   const handleFetchTodoData = async () => {
     const timeOutDuration = 5000; //5sec czekania na odpoiedź serwera
@@ -43,18 +45,45 @@ export function TodoList2() {
 
       {error && <p>{error}</p>}
 
-      <div className="todo-container__list">
-        {todoList.length > 0 &&
-          todoList.map((todo) => {
-            return (
-              <TodoItem
-                todo={todo}
-                key={todo.id}
-                handleFetchTodoData={handleFetchTodoData}
-              />
-            );
-          })}
-      </div>
+      {isAddingMode && <TodoForm setAddingMode={setAddingMode} />}
+
+      {!isAddingMode && (
+        <>
+          <div className="todo-container__list">
+            {todoList.length > 0 &&
+              todoList.map((todo) => {
+                return (
+                  <TodoItem
+                    todo={todo}
+                    key={todo.id}
+                    handleFetchTodoData={handleFetchTodoData}
+                  />
+                );
+              })}
+          </div>
+
+          <button
+            className="big-button"
+            onClick={() => {
+              setAddingMode(true);
+            }}
+          >
+            DODAJ
+          </button>
+        </>
+      )}
     </div>
   );
 }
+
+/**
+ * DODAWANIE TODOSA:
+ * button "DODAJ"
+ * widok formularza dodawania z dwoma inputami i przyciskiem "ZAPISZ" i "COFNIJ"
+ * obsługa widoku (przełączanie widoku)
+ * request do API dodający nowe todo
+ * jezeli request się powiedzie to:
+ *    informujemy o powodzeniu,
+ *    czyscimy formularz
+ * po kliku "COFNIJ" odswiezamy listę
+ */
