@@ -43,6 +43,11 @@
   cursor: pointer;
 }
 
+.todo-item__actions__error-message {
+  font-size: 0.8em;
+  color: var(--color-red);
+}
+
 .todo-item__actions__icon {
   font-size: 50px;
   text-align: center;

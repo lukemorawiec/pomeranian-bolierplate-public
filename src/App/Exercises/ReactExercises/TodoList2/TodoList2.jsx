@@ -46,7 +46,13 @@ export function TodoList2() {
       <div className="todo-container__list">
         {todoList.length > 0 &&
           todoList.map((todo) => {
-            return <TodoItem todo={todo} key={todo.id} />;
+            return (
+              <TodoItem
+                todo={todo}
+                key={todo.id}
+                handleFetchTodoData={handleFetchTodoData}
+              />
+            );
           })}
       </div>
     </div>
