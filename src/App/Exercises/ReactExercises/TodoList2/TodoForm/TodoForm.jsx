@@ -1,16 +1,32 @@
 import { useState } from 'react';
 import './TodoForm.css';
+import { BASE_API_URL } from '../TodoList2';
+import axios from 'axios';
 
 export function TodoForm({ setAddingMode }) {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [note, setNote] = useState('');
 
-  function handleCreateTodo() {
-    console.log('title', title);
-    console.log('author', author);
-    console.log('note', note);
+  const [isError, setError] = useState(false);
+  const [isSuccess, setSuccess] = useState(false);
+
+  async function handleCreateTodo() {
+    try {
+      await axios.post(BASE_API_URL + '/todo', {
+        title: title,
+        note, // === note: note
+        author,
+      });
+
+      setSuccess(true);
+    } catch (error) {
+      setError(true);
+    }
   }
+
+  const isReadyToSend =
+    title.length > 0 && author.length > 0 && note.length > 0;
 
   return (
     <div className="todo-form">
@@ -51,6 +67,16 @@ export function TodoForm({ setAddingMode }) {
         />
       </div>
 
+      {isSuccess && (
+        <p className="todo-form__success-message">Todo "{title}" dodało się!</p>
+      )}
+
+      {isError && (
+        <p className="todo-form__error-message">
+          Wystąpił błąd, spróbuj ponownie!
+        </p>
+      )}
+
       <div className="todo-form__buttons">
         <button
           className="big-button"
@@ -65,6 +91,7 @@ export function TodoForm({ setAddingMode }) {
           onClick={() => {
             handleCreateTodo();
           }}
+          disabled={!isReadyToSend}
         >
           DODAJ
         </button>
