@@ -64,3 +64,8 @@ code {
   background-color: #ccc;
   cursor: crosshair;
 }
+
+/* input.input-error,
+textarea.input-error {
+  border: 1px solid red;
+} */

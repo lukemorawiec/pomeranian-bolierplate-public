@@ -15,10 +15,12 @@
 
 .todo-form__error-message {
   color: red;
-  font-weight: bold;
 }
 
 .todo-form__success-message {
   color: green;
-  font-weight: bold;
+}
+
+.todo-form__info-message {
+  color: blue;
 }

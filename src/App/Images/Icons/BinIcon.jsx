@@ -1,7 +1,7 @@
-import './BinIcon.css';
+import './Icon.css';
 
 export function BinIcon({ isError }) {
-  const svgClassName = `bin-icon ${isError ? 'bin-icon--error' : ''}`;
+  const svgClassName = `icon ${isError ? 'icon--error' : ''}`;
 
   return (
     <svg
