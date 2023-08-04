@@ -2,6 +2,7 @@ import axios from 'axios';
 import { formatDate } from '../../../../../helpers/formatDate';
 import { BinIcon } from '../../../../Images/Icons/BinIcon';
 import { EditIcon } from '../../../../Images/Icons/EditIcon';
+import { CheckMarkIcon } from '../../../../Images/Icons/CheckMarkIcon';
 import './TodoItem.css';
 import { BASE_API_URL } from '../TodoList2';
 import { useState } from 'react';
@@ -11,6 +12,8 @@ export function TodoItem({
   handleFetchTodoData,
   setIdForEdit,
   setFormVisibility,
+  updateTodoList,
+  setTest,
 }) {
   const { id, title, author, createdAt, isDone, doneDate, note } = todo;
   const [isRemoveError, setRemoveError] = useState(false);
@@ -25,6 +28,18 @@ export function TodoItem({
       })
       .catch(() => {
         setRemoveError(true);
+      });
+  }
+
+  function handleMarkAsDoneClick() {
+    axios
+      .put(BASE_API_URL + '/todo/' + id + '/markAsDone')
+      .then((response) => {
+        const updatedTodo = response.data;
+        updateTodoList(updatedTodo);
+      })
+      .catch(() => {
+        // -----
       });
   }
 
@@ -56,6 +71,14 @@ export function TodoItem({
         >
           <EditIcon />
         </button>
+        <button
+          className="todo-item__actions__button"
+          onClick={() => {
+            handleMarkAsDoneClick();
+          }}
+        >
+          <CheckMarkIcon />
+        </button>
         {isRemoveError && (
           <div className="todo-item__actions__error-message">
             nie udało się usunąć
@@ -85,4 +108,12 @@ export function TodoItem({
  * request do API
  * sprawdzenie czy API wykonało usunięcie todosa
  * zaktualizowanie listy todosów po usunięciu
+ */
+
+/**
+ * ODZNACZANIE `DONE` TODOSA:
+ * utworzenie buttona
+ * wybór elementu do odznaczenia
+ * request do API
+ * sprawdzenie czy API wykonało i od razu aktualizacja odpowiedniego todosa
  */

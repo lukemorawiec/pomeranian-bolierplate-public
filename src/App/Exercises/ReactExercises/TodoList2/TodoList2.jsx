@@ -13,7 +13,17 @@ export function TodoList2() {
   const [isFormVisible, setFormVisibility] = useState(false);
 
   const [idForEdit, setIdForEdit] = useState(null);
-  console.log('idForEdit:', idForEdit);
+
+  function updateTodoList(updatedTodo) {
+    setTodoList(
+      todoList.map((todo) => {
+        if (todo.id === updatedTodo.id) {
+          return updatedTodo;
+        }
+        return todo;
+      })
+    );
+  }
 
   const handleFetchTodoData = async (givenId) => {
     // jezeli nie podamy w wywołaniu funkcji parametru `givenId`, to ta wartość będzie `undefined`
@@ -39,16 +49,7 @@ export function TodoList2() {
       setError('');
 
       if (isGetSpecificTodoMode) {
-        const updatedTodo = response.data;
-
-        setTodoList(
-          todoList.map((todo) => {
-            if (todo.id === updatedTodo.id) {
-              return updatedTodo;
-            }
-            return todo;
-          })
-        );
+        updateTodoList(response.data);
       } else {
         setTodoList(response.data);
       }
@@ -88,6 +89,7 @@ export function TodoList2() {
                     handleFetchTodoData={handleFetchTodoData}
                     setIdForEdit={setIdForEdit}
                     setFormVisibility={setFormVisibility}
+                    updateTodoList={updateTodoList}
                   />
                 );
               })}

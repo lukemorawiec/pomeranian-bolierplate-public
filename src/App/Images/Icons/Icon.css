@@ -2,8 +2,16 @@
   stroke: #000;
 }
 
+.icon--check-mark path {
+  fill: #000;
+}
+
 .icon:hover path {
   stroke: #06a0f9;
+}
+
+.icon--check-mark:hover path {
+  fill: #06a0f9;
 }
 
 .icon--error path {
