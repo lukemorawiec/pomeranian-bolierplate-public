@@ -20,9 +20,16 @@ export function Form2() {
   const [formData, setFormData] = useState({
     product: 'devops',
     paymentType: 'paypal',
+    additionalOptions: {
+      github: true,
+      environment: false,
+      extraDocuments: true,
+    },
   });
 
   console.log('formData: ', formData);
+
+  function updateAdditionalOptions(optionName, value) {}
 
   function updateFormData(onChangeEvent) {
     setFormData({
@@ -35,7 +42,9 @@ export function Form2() {
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        console.log('select:', event.target.product.value);
+        console.log('product:', event.target.product.value);
+        console.log('paymentType:', event.target.product.value);
+        console.log('additionalOption:', event.target.additionalOption.checked);
       }}
     >
       <MainSection title="ZAMÓWIENIE PRODUKTU">
@@ -61,6 +70,11 @@ export function Form2() {
             value={formData.paymentType}
             onChange={updateFormData}
           />
+        </FieldSection>
+        <FieldSection title="Opcje dodatkowe do zamówienia">
+          <input type="checkbox" name="github" />
+          <input type="checkbox" name="env" />
+          <input type="checkbox" name="extraDocs" />
         </FieldSection>
       </MainSection>
 
