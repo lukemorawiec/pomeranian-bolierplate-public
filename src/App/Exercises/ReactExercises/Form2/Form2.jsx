@@ -18,9 +18,9 @@ const paymentTypeOptions = [
 ];
 
 const additionalOptionList = [
-  { value: 'github', label: 'Intro do GitHub' },
-  { value: 'environment', label: 'Ustawienia środowiska' },
-  { value: 'extraDocuments', label: 'Materiały dodatkowe' },
+  { fieldName: 'github', label: 'Intro do GitHub' },
+  { fieldName: 'environment', label: 'Ustawienia środowiska' },
+  { fieldName: 'extraDocuments', label: 'Materiały dodatkowe' },
 ];
 
 export function Form2() {
@@ -32,17 +32,20 @@ export function Form2() {
       environment: false,
       extraDocuments: true,
     },
+    nameAndSurname: '',
+    email: '',
+    details: '',
     consents: false,
   });
 
   console.log('formData: ', formData);
 
-  function updateAdditionalOptions(optionName, newValue) {
+  function updateAdditionalOptions(fieldName, newValue) {
     setFormData({
       ...formData,
       additionalOptions: {
         ...formData.additionalOptions,
-        [optionName]: newValue,
+        [fieldName]: newValue,
       },
     });
   }
@@ -88,16 +91,11 @@ export function Form2() {
           />
         </FieldSection>
         <FieldSection title="Opcje dodatkowe do zamówienia">
-          <label htmlFor="checkbox-github">
-            <input type="checkbox" id="checkbox-github" name="github" /> Intro
-            do GitHub
-          </label>
-
           <Checkboxes
             list={additionalOptionList.map((item) => {
               return {
                 ...item,
-                isChecked: formData.additionalOptions[item.value],
+                isChecked: formData.additionalOptions[item.fieldName],
               };
             })}
             onChange={updateAdditionalOptions}
@@ -106,7 +104,41 @@ export function Form2() {
       </MainSection>
 
       <MainSection title="DANE DO REALIZACJI ZAMÓWIENIA">
-        <div>test</div>
+        <FieldSection title="Imię i nazwisko">
+          <input type="text" name="nameAndSurname" />
+        </FieldSection>
+        <FieldSection title="Email">
+          <input type="text" name="email" />
+        </FieldSection>
+
+        <FieldSection title="Uwagi dodatkowe">
+          <textarea
+            name="details"
+            cols="40"
+            rows="10"
+            style={{ resize: 'none' }}
+          />
+        </FieldSection>
+      </MainSection>
+
+      <MainSection title="ZGODY">
+        <FieldSection title="Regulamin">
+          <Checkboxes
+            list={[
+              {
+                fieldName: 'consents',
+                label: 'apceptuję regulamin*',
+                isChecked: formData.consents,
+              },
+            ]}
+            onChange={(_, newValue) => {
+              setFormData({
+                ...formData,
+                consents: newValue,
+              });
+            }}
+          />
+        </FieldSection>
       </MainSection>
       <button type="submit">WYŚLIJ</button>
     </form>
