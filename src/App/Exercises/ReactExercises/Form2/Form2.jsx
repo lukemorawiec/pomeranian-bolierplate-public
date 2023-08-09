@@ -3,6 +3,7 @@ import { FieldSection } from './FieldSection/FieldSection';
 import './Form2.css';
 import { MainSection } from './MainSection/MainSection';
 import { RadioButtons } from './RadioButtons/RadioButtons';
+import { Checkboxes } from './Checkboxes/Checkboxes';
 
 const productOptions = [
   { value: 'frontend', label: 'kurs front-end' },
@@ -16,6 +17,12 @@ const paymentTypeOptions = [
   { value: 'transfer', label: 'przelew tradycyjny' },
 ];
 
+const additionalOptionList = [
+  { value: 'github', label: 'Intro do GitHub' },
+  { value: 'environment', label: 'Ustawienia środowiska' },
+  { value: 'extraDocuments', label: 'Materiały dodatkowe' },
+];
+
 export function Form2() {
   const [formData, setFormData] = useState({
     product: 'devops',
@@ -25,11 +32,20 @@ export function Form2() {
       environment: false,
       extraDocuments: true,
     },
+    consents: false,
   });
 
   console.log('formData: ', formData);
 
-  function updateAdditionalOptions(optionName, value) {}
+  function updateAdditionalOptions(optionName, newValue) {
+    setFormData({
+      ...formData,
+      additionalOptions: {
+        ...formData.additionalOptions,
+        [optionName]: newValue,
+      },
+    });
+  }
 
   function updateFormData(onChangeEvent) {
     setFormData({
@@ -72,9 +88,20 @@ export function Form2() {
           />
         </FieldSection>
         <FieldSection title="Opcje dodatkowe do zamówienia">
-          <input type="checkbox" name="github" />
-          <input type="checkbox" name="env" />
-          <input type="checkbox" name="extraDocs" />
+          <label htmlFor="checkbox-github">
+            <input type="checkbox" id="checkbox-github" name="github" /> Intro
+            do GitHub
+          </label>
+
+          <Checkboxes
+            list={additionalOptionList.map((item) => {
+              return {
+                ...item,
+                isChecked: formData.additionalOptions[item.value],
+              };
+            })}
+            onChange={updateAdditionalOptions}
+          />
         </FieldSection>
       </MainSection>
 
