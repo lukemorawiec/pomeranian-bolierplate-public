@@ -5,6 +5,12 @@ import { MainSection } from './MainSection/MainSection';
 import { RadioButtons } from './RadioButtons/RadioButtons';
 import { Checkboxes } from './Checkboxes/Checkboxes';
 
+const validateEmail = (value) => {
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  return emailPattern.test(value);
+};
+
 const productOptions = [
   { value: 'frontend', label: 'kurs front-end' },
   { value: 'backend', label: 'kurs backend-end' },
@@ -23,6 +29,14 @@ const additionalOptionList = [
   { fieldName: 'extraDocuments', label: 'Materiały dodatkowe' },
 ];
 
+const requiredFields = [
+  'nameAndSurname',
+  'email',
+  'product',
+  'paymentType',
+  'consents',
+];
+
 export function Form2() {
   const [formData, setFormData] = useState({
     product: 'devops',
@@ -37,10 +51,18 @@ export function Form2() {
     details: '',
     consents: false,
   });
+  const [isAllRequiredFieldsFilled, setIsAllRequiredFieldsFilled] =
+    useState(true);
 
-  console.log('formData: ', formData);
+  const isNameAndSurnameValid =
+    formData.nameAndSurname.length > 0
+      ? formData.nameAndSurname.trim().includes(' ')
+      : true;
+  const isEmailValid =
+    formData.email.length > 0 ? validateEmail(formData.email) : true;
 
   function updateAdditionalOptions(fieldName, newValue) {
+    setIsAllRequiredFieldsFilled(true);
     setFormData({
       ...formData,
       additionalOptions: {
@@ -51,19 +73,27 @@ export function Form2() {
   }
 
   function updateFormData(onChangeEvent) {
+    setIsAllRequiredFieldsFilled(true);
     setFormData({
       ...formData,
       [onChangeEvent.target.name]: onChangeEvent.target.value,
     });
   }
 
+  function handleSubmit() {
+    const { nameAndSurname, email, product, paymentType, consents } = formData;
+    if (nameAndSurname && email && product && paymentType && consents) {
+      console.log('DANE WYSŁANE POPRAWNIE: ', formData);
+    } else {
+      setIsAllRequiredFieldsFilled(false);
+    }
+  }
+
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        console.log('product:', event.target.product.value);
-        console.log('paymentType:', event.target.product.value);
-        console.log('additionalOption:', event.target.additionalOption.checked);
+        handleSubmit();
       }}
     >
       <MainSection title="ZAMÓWIENIE PRODUKTU">
@@ -105,10 +135,30 @@ export function Form2() {
 
       <MainSection title="DANE DO REALIZACJI ZAMÓWIENIA">
         <FieldSection title="Imię i nazwisko">
-          <input type="text" name="nameAndSurname" />
+          <input
+            type="text"
+            name="nameAndSurname"
+            value={formData.nameAndSurname}
+            onChange={updateFormData}
+            className={!isNameAndSurnameValid ? 'input-field-error' : ''}
+          />
+          {!isNameAndSurnameValid && (
+            <p className="input-field-error-message">
+              Nie podałeś(-aś) nazwiska!
+            </p>
+          )}
         </FieldSection>
         <FieldSection title="Email">
-          <input type="text" name="email" />
+          <input
+            type="text"
+            name="email"
+            value={formData.email}
+            onChange={updateFormData}
+            className={!isEmailValid ? 'input-field-error' : ''}
+          />
+          {!isEmailValid && (
+            <p className="input-field-error-message">Email jest niepoprawny!</p>
+          )}
         </FieldSection>
 
         <FieldSection title="Uwagi dodatkowe">
@@ -117,6 +167,8 @@ export function Form2() {
             cols="40"
             rows="10"
             style={{ resize: 'none' }}
+            value={formData.details}
+            onChange={updateFormData}
           />
         </FieldSection>
       </MainSection>
@@ -132,6 +184,7 @@ export function Form2() {
               },
             ]}
             onChange={(_, newValue) => {
+              setIsAllRequiredFieldsFilled(true);
               setFormData({
                 ...formData,
                 consents: newValue,
@@ -140,6 +193,13 @@ export function Form2() {
           />
         </FieldSection>
       </MainSection>
+
+      {!isAllRequiredFieldsFilled && (
+        <p className="input-field-error-message">
+          Wypełnij wszystkie pola wymagane!
+        </p>
+      )}
+
       <button type="submit">WYŚLIJ</button>
     </form>
   );
