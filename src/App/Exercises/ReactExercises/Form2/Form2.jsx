@@ -54,12 +54,15 @@ export function Form2() {
   const [isAllRequiredFieldsFilled, setIsAllRequiredFieldsFilled] =
     useState(true);
 
+  const [isEmailValid, setIsEmailValid] = useState();
+
   const isNameAndSurnameValid =
     formData.nameAndSurname.length > 0
       ? formData.nameAndSurname.trim().includes(' ')
       : true;
-  const isEmailValid =
-    formData.email.length > 0 ? validateEmail(formData.email) : true;
+
+  const isFieldsValid =
+    isEmailValid && isNameAndSurnameValid && isAllRequiredFieldsFilled;
 
   function updateAdditionalOptions(fieldName, newValue) {
     setIsAllRequiredFieldsFilled(true);
@@ -154,9 +157,12 @@ export function Form2() {
             name="email"
             value={formData.email}
             onChange={updateFormData}
-            className={!isEmailValid ? 'input-field-error' : ''}
+            className={isEmailValid === false ? 'input-field-error' : ''}
+            onBlur={() => {
+              setIsEmailValid(validateEmail(formData.email));
+            }}
           />
-          {!isEmailValid && (
+          {isEmailValid === false && (
             <p className="input-field-error-message">Email jest niepoprawny!</p>
           )}
         </FieldSection>
@@ -200,7 +206,9 @@ export function Form2() {
         </p>
       )}
 
-      <button type="submit">WYŚLIJ</button>
+      <button type="submit" disabled={!isFieldsValid}>
+        WYŚLIJ
+      </button>
     </form>
   );
 }
