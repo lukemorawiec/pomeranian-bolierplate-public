@@ -4,6 +4,7 @@ import './Form2.css';
 import { MainSection } from './MainSection/MainSection';
 import { RadioButtons } from './RadioButtons/RadioButtons';
 import { Checkboxes } from './Checkboxes/Checkboxes';
+import Select from 'react-select';
 
 const validateEmail = (value) => {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -101,7 +102,7 @@ export function Form2() {
     >
       <MainSection title="ZAMÓWIENIE PRODUKTU">
         <FieldSection title="Wybierz produkt*">
-          <select
+          {/* <select
             name="product"
             value={formData.product}
             onChange={(event) => {
@@ -113,7 +114,20 @@ export function Form2() {
                 {option.label}
               </option>
             ))}
-          </select>
+          </select> */}
+
+          <Select
+            value={productOptions.find(
+              (item) => item.value === formData.product
+            )}
+            options={productOptions}
+            onChange={(selectedItem) => {
+              setFormData({
+                ...formData,
+                product: selectedItem.value,
+              });
+            }}
+          />
         </FieldSection>
         <FieldSection title="Wybierz formę płatności*">
           <RadioButtons
