@@ -7,7 +7,6 @@ export function UseRef() {
 
   useEffect(() => {
     document.getElementById('root').addEventListener('mousemove', (event) => {
-      console.log(event);
       const { x, y } = event;
 
       pointRef.current.style.top = `${y}px`;

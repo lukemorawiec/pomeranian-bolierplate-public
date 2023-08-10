@@ -12,6 +12,8 @@ export const ToDoStatus = ({
         return 'checked-icon';
       case false:
         return 'unchecked-icon';
+      default:
+        return '-';
     }
   };
 

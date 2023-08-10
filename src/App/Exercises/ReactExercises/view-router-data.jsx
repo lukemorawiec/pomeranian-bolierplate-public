@@ -8,6 +8,7 @@ import { formsMetaData } from './Forms/router-data';
 import { FormsValidationData } from './FormsValidation/router-data';
 import { reduxRouterData } from './Redux/router-data';
 import { todoList2MetaData } from './TodoList2/router-data';
+import { form2MetaData } from './Form2/router-data';
 
 export const blockRouterMetaData = [
   SubRouteExampleMetaData,
@@ -18,5 +19,6 @@ export const blockRouterMetaData = [
   FormsValidationData,
   reduxRouterData,
   todoList2MetaData,
+  form2MetaData,
 ];
 export const blockRouterData = getParsedRouterDataList(blockRouterMetaData);

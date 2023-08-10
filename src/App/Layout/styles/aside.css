@@ -20,8 +20,11 @@ aside li {
 
 .menu-icon {
   margin-right: 10px;
-  fill: red;
   width: 23px;
+}
+
+.menu-icon path {
+  stroke: red;
 }
 
 .aside-row {
