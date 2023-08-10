@@ -1,14 +1,36 @@
 import { useState } from 'react';
-import { FieldSection } from './FieldSection/FieldSection';
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from 'firebase/analytics';
+import { getFirestore, addDoc, collection } from 'firebase/firestore';
+import Select from 'react-select';
 import './Form2.css';
-import { MainSection } from './MainSection/MainSection';
 import { RadioButtons } from './RadioButtons/RadioButtons';
 import { Checkboxes } from './Checkboxes/Checkboxes';
-import Select from 'react-select';
+import { MainSection } from './MainSection/MainSection';
+import { FieldSection } from './FieldSection/FieldSection';
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: 'AIzaSyDKFxElKEdKn9Lf21SqBeFpyRJo3w3P40w',
+  authDomain: 'pomeranian-form-db-luke.firebaseapp.com',
+  projectId: 'pomeranian-form-db-luke',
+  storageBucket: 'pomeranian-form-db-luke.appspot.com',
+  messagingSenderId: '673759080838',
+  appId: '1:673759080838:web:f809a341910541fd357c07',
+  measurementId: 'G-YPC2DS8EL1',
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getFirestore(app);
 
 const validateEmail = (value) => {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
   return emailPattern.test(value);
 };
 
@@ -52,6 +74,7 @@ export function Form2() {
     details: '',
     consents: false,
   });
+
   const [isAllRequiredFieldsFilled, setIsAllRequiredFieldsFilled] =
     useState(true);
 
@@ -84,10 +107,19 @@ export function Form2() {
     });
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     const { nameAndSurname, email, product, paymentType, consents } = formData;
     if (nameAndSurname && email && product && paymentType && consents) {
       console.log('DANE WYSŁANE POPRAWNIE: ', formData);
+
+      try {
+        const docRef = await addDoc(collection(db, 'orders'), formData);
+
+        console.log('Document written with ID: ', docRef.id);
+        console.log(docRef);
+      } catch (e) {
+        console.error('Error adding document: ', e);
+      }
     } else {
       setIsAllRequiredFieldsFilled(false);
     }
