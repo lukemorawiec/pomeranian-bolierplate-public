@@ -1,7 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-import { getFirestore, addDoc, collection } from 'firebase/firestore';
+import {
+  getFirestore,
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+} from 'firebase/firestore';
 import Select from 'react-select';
 import './Form2.css';
 import { RadioButtons } from './RadioButtons/RadioButtons';
@@ -14,8 +20,10 @@ import { FieldSection } from './FieldSection/FieldSection';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+console.log(process.env);
+
 const firebaseConfig = {
-  apiKey: 'AIzaSyDKFxElKEdKn9Lf21SqBeFpyRJo3w3P40w',
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: 'pomeranian-form-db-luke.firebaseapp.com',
   projectId: 'pomeranian-form-db-luke',
   storageBucket: 'pomeranian-form-db-luke.appspot.com',
@@ -79,6 +87,15 @@ export function Form2() {
     useState(true);
 
   const [isEmailValid, setIsEmailValid] = useState();
+  const [orderId, setOrderId] = useState();
+
+  useEffect(() => {
+    if (orderId) {
+      getDoc(doc(db, 'orders', orderId)).then((response) => {
+        console.log(response.data());
+      });
+    }
+  }, [orderId]);
 
   const isNameAndSurnameValid =
     formData.nameAndSurname.length > 0
@@ -110,13 +127,9 @@ export function Form2() {
   async function handleSubmit() {
     const { nameAndSurname, email, product, paymentType, consents } = formData;
     if (nameAndSurname && email && product && paymentType && consents) {
-      console.log('DANE WYSŁANE POPRAWNIE: ', formData);
-
       try {
         const docRef = await addDoc(collection(db, 'orders'), formData);
-
-        console.log('Document written with ID: ', docRef.id);
-        console.log(docRef);
+        setOrderId(docRef.id);
       } catch (e) {
         console.error('Error adding document: ', e);
       }
@@ -126,15 +139,16 @@ export function Form2() {
   }
 
   return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault();
-        handleSubmit();
-      }}
-    >
-      <MainSection title="ZAMÓWIENIE PRODUKTU">
-        <FieldSection title="Wybierz produkt*">
-          {/* <select
+    <>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          handleSubmit();
+        }}
+      >
+        <MainSection title="ZAMÓWIENIE PRODUKTU">
+          <FieldSection title="Wybierz produkt*">
+            {/* <select
             name="product"
             value={formData.product}
             onChange={(event) => {
@@ -148,113 +162,129 @@ export function Form2() {
             ))}
           </select> */}
 
-          <Select
-            value={productOptions.find(
-              (item) => item.value === formData.product
+            <Select
+              value={productOptions.find(
+                (item) => item.value === formData.product
+              )}
+              options={productOptions}
+              onChange={(selectedItem) => {
+                setFormData({
+                  ...formData,
+                  product: selectedItem.value,
+                });
+              }}
+            />
+          </FieldSection>
+          <FieldSection title="Wybierz formę płatności*">
+            <RadioButtons
+              name="paymentType"
+              options={paymentTypeOptions}
+              value={formData.paymentType}
+              onChange={updateFormData}
+            />
+          </FieldSection>
+          <FieldSection title="Opcje dodatkowe do zamówienia">
+            <Checkboxes
+              list={additionalOptionList.map((item) => {
+                return {
+                  ...item,
+                  isChecked: formData.additionalOptions[item.fieldName],
+                };
+              })}
+              onChange={updateAdditionalOptions}
+            />
+          </FieldSection>
+        </MainSection>
+
+        <MainSection title="DANE DO REALIZACJI ZAMÓWIENIA">
+          <FieldSection title="Imię i nazwisko">
+            <input
+              type="text"
+              name="nameAndSurname"
+              value={formData.nameAndSurname}
+              onChange={updateFormData}
+              className={!isNameAndSurnameValid ? 'input-field-error' : ''}
+            />
+            {!isNameAndSurnameValid && (
+              <p className="input-field-error-message">
+                Nie podałeś(-aś) nazwiska!
+              </p>
             )}
-            options={productOptions}
-            onChange={(selectedItem) => {
-              setFormData({
-                ...formData,
-                product: selectedItem.value,
-              });
-            }}
-          />
-        </FieldSection>
-        <FieldSection title="Wybierz formę płatności*">
-          <RadioButtons
-            name="paymentType"
-            options={paymentTypeOptions}
-            value={formData.paymentType}
-            onChange={updateFormData}
-          />
-        </FieldSection>
-        <FieldSection title="Opcje dodatkowe do zamówienia">
-          <Checkboxes
-            list={additionalOptionList.map((item) => {
-              return {
-                ...item,
-                isChecked: formData.additionalOptions[item.fieldName],
-              };
-            })}
-            onChange={updateAdditionalOptions}
-          />
-        </FieldSection>
-      </MainSection>
+          </FieldSection>
+          <FieldSection title="Email">
+            <input
+              type="text"
+              name="email"
+              value={formData.email}
+              onChange={updateFormData}
+              className={isEmailValid === false ? 'input-field-error' : ''}
+              onBlur={() => {
+                setIsEmailValid(validateEmail(formData.email));
+              }}
+            />
+            {isEmailValid === false && (
+              <p className="input-field-error-message">
+                Email jest niepoprawny!
+              </p>
+            )}
+          </FieldSection>
 
-      <MainSection title="DANE DO REALIZACJI ZAMÓWIENIA">
-        <FieldSection title="Imię i nazwisko">
-          <input
-            type="text"
-            name="nameAndSurname"
-            value={formData.nameAndSurname}
-            onChange={updateFormData}
-            className={!isNameAndSurnameValid ? 'input-field-error' : ''}
-          />
-          {!isNameAndSurnameValid && (
-            <p className="input-field-error-message">
-              Nie podałeś(-aś) nazwiska!
-            </p>
-          )}
-        </FieldSection>
-        <FieldSection title="Email">
-          <input
-            type="text"
-            name="email"
-            value={formData.email}
-            onChange={updateFormData}
-            className={isEmailValid === false ? 'input-field-error' : ''}
-            onBlur={() => {
-              setIsEmailValid(validateEmail(formData.email));
-            }}
-          />
-          {isEmailValid === false && (
-            <p className="input-field-error-message">Email jest niepoprawny!</p>
-          )}
-        </FieldSection>
+          <FieldSection title="Uwagi dodatkowe">
+            <textarea
+              name="details"
+              cols="40"
+              rows="10"
+              style={{ resize: 'none' }}
+              value={formData.details}
+              onChange={updateFormData}
+            />
+          </FieldSection>
+        </MainSection>
 
-        <FieldSection title="Uwagi dodatkowe">
-          <textarea
-            name="details"
-            cols="40"
-            rows="10"
-            style={{ resize: 'none' }}
-            value={formData.details}
-            onChange={updateFormData}
-          />
-        </FieldSection>
-      </MainSection>
+        <MainSection title="ZGODY">
+          <FieldSection title="Regulamin">
+            <Checkboxes
+              list={[
+                {
+                  fieldName: 'consents',
+                  label: 'apceptuję regulamin*',
+                  isChecked: formData.consents,
+                },
+              ]}
+              onChange={(_, newValue) => {
+                setIsAllRequiredFieldsFilled(true);
+                setFormData({
+                  ...formData,
+                  consents: newValue,
+                });
+              }}
+            />
+          </FieldSection>
+        </MainSection>
 
-      <MainSection title="ZGODY">
-        <FieldSection title="Regulamin">
-          <Checkboxes
-            list={[
-              {
-                fieldName: 'consents',
-                label: 'apceptuję regulamin*',
-                isChecked: formData.consents,
-              },
-            ]}
-            onChange={(_, newValue) => {
-              setIsAllRequiredFieldsFilled(true);
-              setFormData({
-                ...formData,
-                consents: newValue,
-              });
-            }}
-          />
-        </FieldSection>
-      </MainSection>
+        {!isAllRequiredFieldsFilled && (
+          <p className="input-field-error-message">
+            Wypełnij wszystkie pola wymagane!
+          </p>
+        )}
 
-      {!isAllRequiredFieldsFilled && (
-        <p className="input-field-error-message">
-          Wypełnij wszystkie pola wymagane!
-        </p>
+        <button type="submit" disabled={!isFieldsValid}>
+          WYŚLIJ
+        </button>
+      </form>
+      {orderId && (
+        <div className="modal-container">
+          <div className="modal">
+            <button
+              onClick={() => {
+                setOrderId(undefined);
+              }}
+            >
+              CLOSE
+            </button>
+          </div>
+        </div>
       )}
-
-      <button type="submit" disabled={!isFieldsValid}>
-        WYŚLIJ
-      </button>
-    </form>
+    </>
   );
 }
